@@ -1,0 +1,4 @@
+CREATE TABLE web.dtImage (
+id_image INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+nama_image VARCHAR( 30 ) NOT NULL
+) ENGINE = InnoDB
