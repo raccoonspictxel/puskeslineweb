@@ -1,3 +1,10 @@
+<?php 
+class konsultasi{
+
+}
+    
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,7 +26,7 @@
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!--================Header Menu Area =================-->
     <header class="header_area">
         <div class="top_menu row m0">
@@ -43,7 +50,7 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
+                    <a class="navbar-brand logo_h" href="index.php"><img src="img/logo.png" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -52,8 +59,8 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li> 
-                            <li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li> 
+                            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li> 
+                            <li class="nav-item"><a class="nav-link" href="about-us.php">About</a></li> 
                             <li class="nav-item"><a class="nav-link" href="department.html">Artikel</a></li> 
                             <li class="nav-item"><a class="nav-link" href="doctors.php">Tanya Dokter</a></li>
                             <li class="nav-item"><a class="nav-link" href="scanresep.php">Scan Resep</a></li>     
@@ -88,10 +95,9 @@
 
 
    
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
     <!--================ Team section end =================-->  
 
- 
 <div class="container mb-3">
     <h2 align="center" style="margin: 60px 10px 10px 10px;">Konsultasi</h2><hr>
     <form method="POST" id="form_komen">
@@ -99,7 +105,7 @@
             <input type="text" name="nama_pengirim" id="nama_pengirim" class="form-control" placeholder="Masukkan Nama" />
         </div>
         <div class="form-group">
-            <textarea name="komen" id="komen" class="form-control" placeholder="Tulis Komentar" rows="5"></textarea>
+            <textarea name="komen" id="komen" class="form-control" placeholder="Tulis Konsultasi" rows="5"></textarea>
         </div>
         <div class="form-group">
             <input type="hidden" name="komentar_id" id="komentar_id" value="0" />
@@ -107,7 +113,7 @@
         </div>
     </form>
     <hr>
-    <h4 class="mb-3">Komentar :</h4>
+    <h4 class="mb-3">Konsultasi :</h4>
     <span id="message"></span>
    
     <div id="display_comment"></div>
@@ -143,7 +149,7 @@ Hak Cipta &copy;<script>document.write(new Date().getFullYear());</script> Racco
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script>
+   <script>
     $(document).ready(function(){
         $('#form_komen').on('submit', function(event){
             event.preventDefault();

@@ -1,3 +1,7 @@
+<?php
+class tampil{
+}
+?>
 <html>
 <head>
 <title>Halaman Komentar</title>

@@ -1,3 +1,8 @@
+  <?php
+  class scanresep{
+
+  }
+  ?> 
 <!doctype html>
 <html lang="en">
 <head>
@@ -42,7 +47,7 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
+                    <a class="navbar-brand logo_h" href="index.php"><img src="img/logo.png" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -51,8 +56,8 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li> 
-                            <li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li> 
+                            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li> 
+                            <li class="nav-item"><a class="nav-link" href="about-us.php">About</a></li> 
                             <li class="nav-item"><a class="nav-link" href="department.html">Artikel</a></li> 
                             <li class="nav-item"><a class="nav-link" href="doctors.php">Tanya Dokter</a></li>
                             <li class="nav-item"><a class="nav-link" href="scanresep.php">Scan Resep</a></li>     
@@ -95,74 +100,66 @@
 <form action="scanresep.php" enctype="multipart/form-data" method="post">
 <table border="0" align="center">
 <tbody>
+  <form action="aksi.php" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" name="upload" value="Upload">
+  </form>
+<br>
+<?php 
+    include 'koneksiupload.php';
 
-
-<h2>Upload Resep Anda</h2>
-
-
-<colspan="2" align="center"><input name="gambar" type="file" />
-<input name="tombol" type="submit" value="Upload !" />
-</tr>
-</tbody>
-</table>
-<?php
-   
-  include("fungsi_koneksi.php");
-   
-    
-  $koneksi = koneksi_db();
-  $sql  = "select * from dtimage";
-  $aksi = mysqli_query($koneksi, $sql);
-   
-  echo "";
-         
-  $no = 1;
-  $data = mysqli_fetch_array($aksi)
-    
-?>
-     
-         <img src="img/<?php echo $data['nama_image']; ?>" border="0"/> 
-  
-  
-
-</div>
-</div>
-</div>
-</section>
-
-<?php
-  // code A
-
-  // end of code A
-   
-  // code B
-  $lokasi_file = $_FILES['gambar']['tmp_name'];
-  $tipe_file   = $_FILES['gambar']['type'];
-  $nama_file   = $_FILES['gambar']['name'];
-  $direktori   = "img/$nama_file";
-  // end of code B
-   
-  if (!empty($lokasi_file)) {
-    move_uploaded_file($lokasi_file,$direktori); 
-   
-    // code C
-    $sql = "insert into dtimage values (null,'$nama_file')";
-    $aksi = mysqli_query($koneksi,$sql);
-    // end of code C
-     
-    // code D
-    if (!$aksi) {
-    echo "maaf gagal memasukan gambar";
-    }else{
-    
+    if(isset($_POST['upload'])){
+      $ekstensi_diperbolehkan = array('png','jpg');
+      $nama = $_FILES['file']['name'];
+      $x = explode('.', $nama);
+      $ekstensi = strtolower(end($x));
+      $ukuran = $_FILES['file']['size'];
+      $file_tmp = $_FILES['file']['tmp_name'];  
+ 
+      if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
+        if($ukuran < 1044070){      
+          move_uploaded_file($file_tmp, 'img/'.$nama);
+          $query = mysqli_query($con,"INSERT INTO upload VALUES(NULL, '$nama')");
+          if($query){
+            
+            echo 'FILE BERHASIL DI UPLOAD';
+          }else{
+            echo 'GAGAL MENGUPLOAD GAMBAR';
+          }
+        }else{
+          echo 'UKURAN FILE TERLALU BESAR';
+        }
+      }else{
+        echo 'EKSTENSI FILE YANG DI UPLOAD TIDAK DI PERBOLEHKAN';
+      }
     }
-    // end of code D
-     
-  }else{
-    echo "terjadi kesalahan";  
-  }
-  ?>
+    ?>
+<?php
+$data = mysqli_query($con,"SELECT * from upload");
+while($d = mysqli_fetch_array($data)){
+  echo "1";
+  echo $d['nama_file'];  
 
+   
+?>
+
+
+ <br><img src="<?php echo "img/".$d['nama_file']; ?>"><br>
+<?php
+}
+?>
+
+ <a href="scanresep.php">Upload Lagi</a>
+     
+    <br/>
+    <br/>
+   
+    <br/>
+    <br/>
+ 
+    <table>
+     
+    </table>
 </body>
 </html>
 

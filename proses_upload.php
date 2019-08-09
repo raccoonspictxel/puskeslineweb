@@ -15,7 +15,7 @@
    
     // code C
     $koneksi = koneksi_db();
-    $sql = "insert into dtimage values (null,'$nama_file')";
+    $sql = "INSERT into dtimage values (null,'$nama_file')";
     $aksi = mysqli_query($koneksi,$sql);
     // end of code C
      

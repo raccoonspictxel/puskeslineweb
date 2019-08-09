@@ -1,3 +1,7 @@
+<?php session_start();
+include 'login/config.php';
+
+ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -42,7 +46,7 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
+                    <a class="navbar-brand logo_h" href="index.php"><img src="img/logo.png" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -51,8 +55,8 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li> 
-                            <li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li> 
+                            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li> 
+                            <li class="nav-item"><a class="nav-link" href="about-us.php">About</a></li> 
                             <li class="nav-item"><a class="nav-link" href="department.html">Artikel</a></li> 
                             <li class="nav-item"><a class="nav-link" href="doctors.php">Tanya Dokter</a></li>
                             <li class="nav-item"><a class="nav-link" href="scanresep.php">Scan Resep</a></li>     
@@ -99,38 +103,23 @@
             </div>
 
             <div class="row">
+                <?php
+                    $query = mysqli_query($koneksi,"SELECT * FROM dokter");
+                    
+                    $no=1;
+                    while ($hasil = mysqli_fetch_array($query)) {
+                  ?>
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card card-team">
-                        <img class="card-img rounded-0" src="img/team/1.jpg" alt="">
+                        <img class="card-img rounded-0" src="img/team/<?= $hasil['gambar'] ?>" alt="">
                         <div class="card-team__body text-center">
-                            <h3><a href="#">dr. Ressa Yuneta, SpM</a></h3>
-                            <p>Poli THT</p>
+                            <h3><a href="#"><?= $hasil['nama_dokter'] ?></a></h3>
+                            <p><?= $hasil['spesialis'] ?></p>
                             <a href="konsultasi.php" class="genric-btn success-border radius">Konsultasi</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card card-team">
-                        <img class="card-img rounded-0" src="img/team/2.jpg" alt="">
-                        <div class="card-team__body text-center">
-                            <h3><a href="#">dr. Vebiona Kartini Putri, SpJP</a></h3>
-                            <p>Poli Jantung</p>
-                           <a href="konsultasi.php" class="genric-btn success-border radius">Konsultasi</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card card-team">
-                        <img class="card-img rounded-0" src="img/team/3.jpg" alt="">
-                        <div class="card-team__body text-center">
-                            <h3><a href="#">dr. Fatmawati,SpPK</a></h3>
-                            <p>Patalogi Klinik</p>
-                            <a href="konsultasi.php" class="genric-btn success-border radius">Konsultasi</a>
-                        </div>
-                    </div>
-                </div>
+                <?php $no++; } ?>
          </div>
      </div>
  </section>

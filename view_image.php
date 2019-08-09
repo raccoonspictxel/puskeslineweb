@@ -17,16 +17,16 @@
   while($data = mysqli_fetch_array($aksi)):?>
      <tr>
       <td>
-      
+      <?php echo $no; ?>
       </td>
       <td>
        <center>
-         <img src="img/<?php echo $data['nama_image']; ?>" border="0"/> 
+         <img src="image/<?php echo $data['nama_image']; ?>" border="0"/> 
        </center>
       </td>
      </tr>
   <?php 
-
+ $no++;
   endwhile;
   ?>
   </table>
